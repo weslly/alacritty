@@ -47,7 +47,7 @@ use std::sync::atomic::{AtomicUsize, ATOMIC_USIZE_INIT, Ordering};
 
 // If target isn't macos, reexport everything from ft
 #[cfg(not(target_os = "macos"))]
-mod ft;
+pub mod ft;
 #[cfg(not(target_os = "macos"))]
 pub use ft::{FreeTypeRasterizer as Rasterizer, Error};
 

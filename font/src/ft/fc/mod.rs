@@ -28,19 +28,19 @@ use self::ffi::{FC_WEIGHT_THIN, FC_WEIGHT_EXTRALIGHT, FC_WEIGHT_LIGHT};
 use self::ffi::{FC_WEIGHT_BOOK, FC_WEIGHT_REGULAR, FC_WEIGHT_MEDIUM, FC_WEIGHT_SEMIBOLD};
 use self::ffi::{FC_WEIGHT_BOLD, FC_WEIGHT_EXTRABOLD, FC_WEIGHT_BLACK, FC_WEIGHT_EXTRABLACK};
 
-mod config;
+pub mod config;
 pub use self::config::{Config, ConfigRef};
 
-mod font_set;
+pub mod font_set;
 pub use self::font_set::{FontSet, FontSetRef};
 
-mod object_set;
+pub mod object_set;
 pub use self::object_set::{ObjectSet, ObjectSetRef};
 
-mod char_set;
+pub mod char_set;
 pub use self::char_set::{CharSet, CharSetRef};
 
-mod pattern;
+pub mod pattern;
 pub use self::pattern::{Pattern, PatternRef};
 
 /// Find the font closest matching the provided pattern.

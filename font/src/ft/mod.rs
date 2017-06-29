@@ -19,7 +19,7 @@ use std::cmp::min;
 use freetype::{self, Library, Face};
 
 
-mod fc;
+pub mod fc;
 
 use super::{FontDesc, RasterizedGlyph, Metrics, Size, FontKey, GlyphKey, Weight, Slant, Style};
 
