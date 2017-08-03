@@ -157,6 +157,7 @@ impl<'a> RenderableCellsIter<'a> {
         });
 
         if self.is_wide_cursor(&cell_under_cursor) {
+            println!("wide cursor");
             cell_under_cursor.c = ' ';
             self.cursor_cells.push_back(Indexed {
                 line: self.cursor.line,
@@ -164,6 +165,8 @@ impl<'a> RenderableCellsIter<'a> {
                 inner: cell_under_cursor,
             });
         }
+
+        println!("cursor_cells: {:?}", self.cursor_cells);
     }
 
     #[inline]
@@ -308,6 +311,7 @@ impl<'a> RenderableCellsIter<'a> {
     }
 }
 
+#[derive(Debug)]
 pub struct RenderableCell {
     pub line: Line,
     pub column: Column,
@@ -330,19 +334,24 @@ impl<'a> Iterator for RenderableCellsIter<'a> {
             while self.column < self.grid.num_cols() {
                 // Grab current state for this iteration
                 let line = self.line;
-                let column = self.column;
+                let mut column = self.column;
                 let cell = &self.grid[line][column];
 
                 let index = Linear(line.0 * self.grid.num_cols().0 + column.0);
 
+                let mut is_cursor = false;
+
                 let (cell, selected) = if index == self.cursor_index {
                     // Cursor cell
                     let cell = self.cursor_cells.pop_front().unwrap();
+                    is_cursor = true;
+                    column = cell.column;
 
                     // Since there may be multiple cursor cells (for a wide
                     // char), only update iteration position after all cursor
                     // cells have been drawn.
                     if self.cursor_cells.is_empty() {
+                        println!("advancing column from {} to {}", self.column, cell.column + 1);
                         self.line = cell.line;
                         self.column = cell.column + 1;
                     }
@@ -369,14 +378,18 @@ impl<'a> Iterator for RenderableCellsIter<'a> {
                     (self.compute_fg_rgb(&cell.fg, &cell), self.compute_bg_rgb(&cell.bg))
                 };
 
-                return Some(RenderableCell {
+                let res =  Some(RenderableCell {
                     line: line,
                     column: column,
                     flags: cell.flags,
                     c: cell.c,
                     fg: fg,
                     bg: bg,
-                })
+                });
+                if is_cursor {
+                    println!("{:?}", res);
+                }
+                return res;
             }
 
             self.column = Column(0);

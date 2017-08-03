@@ -38,6 +38,7 @@ pub trait BidirectionalIterator: Iterator {
     fn prev(&mut self) -> Option<Self::Item>;
 }
 
+#[derive(Debug)]
 pub struct Indexed<T> {
     pub line: Line,
     pub column: Column,
