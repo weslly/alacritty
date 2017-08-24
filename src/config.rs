@@ -95,6 +95,20 @@ pub enum VisualBellAnimation {
     Linear,
 }
 
+#[derive(Default, Clone, Debug, Deserialize)]
+pub struct InternationalizationConfig {
+    /// Right alt key is AltGr modifier
+    altgr: bool,
+}
+
+impl InternationalizationConfig {
+    /// Right alt key is AltGr modifier
+    #[inline]
+    pub fn altgr(&self) -> bool {
+        self.altgr
+    }
+}
+
 #[derive(Debug, Deserialize)]
 pub struct VisualBellConfig {
     /// Visual bell animation function
@@ -270,6 +284,10 @@ pub struct Config {
     #[serde(default)]
     visual_bell: VisualBellConfig,
 
+    /// Internationalization configuration
+    #[serde(default)]
+    internationalization: InternationalizationConfig,
+
     /// Hide cursor when typing
     #[serde(default)]
     hide_cursor_when_typing: bool,
@@ -326,6 +344,7 @@ impl Default for Config {
             shell: None,
             config_path: None,
             visual_bell: Default::default(),
+            internationalization: Default::default(),
             env: Default::default(),
             hide_cursor_when_typing: Default::default(),
             live_config_reload: true,
@@ -1138,6 +1157,12 @@ impl Config {
     #[inline]
     pub fn visual_bell(&self) -> &VisualBellConfig {
         &self.visual_bell
+    }
+
+    /// Get internationalization config
+    #[inline]
+    pub fn internationalization(&self) -> &InternationalizationConfig {
+        &self.internationalization
     }
 
     /// Should show render timer
