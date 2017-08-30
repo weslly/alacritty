@@ -14,7 +14,7 @@ name = "alacritty"
 [dependencies]
 libc = "0.2.30"
 cgmath = "0.15"
-notify = "4"
+notify = "2.6"
 bitflags = "0.9.1"
 font = { path = "./font" }
 errno = "0.2.3"
@@ -54,3 +54,6 @@ gl_generator = "0.5.5"
 [profile.release]
 lto = true
 debug = true
+
+[replace]
+"winit:0.7.5" = { git = "https://github.com/mrmekon/winit.git", branch = "macos_dead_key" }
