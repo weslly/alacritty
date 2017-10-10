@@ -161,7 +161,7 @@ Alacritty. Here's a `eopkg` command that should install all of them. If
 something is still found to be missing, please open an issue.
 
 ```sh
-sudo eopkg install freetype2-devel fontconfig-devel
+sudo eopkg install fontconfig-devel
 ```
 
 ### NixOS/Nixpkgs
@@ -246,9 +246,9 @@ run. On most systems this often defaults to
 `$HOME/.config/alacritty/alacritty.yml`.
 
 Many configuration options will take effect immediately upon saving changes to
-the config file. The only exception is the `font`, `dimensions` and `dpi`
-sections which requires Alacritty to be restarted. For further explanation of
-the config file, please consult the comments in the default config file.
+the config file. The only exception is the `font` and `dimensions` sections
+which requires Alacritty to be restarted. For further explanation of the config
+file, please consult the comments in the default config file.
 
 ## Issues (known, unknown, feature requests, etc)
 
